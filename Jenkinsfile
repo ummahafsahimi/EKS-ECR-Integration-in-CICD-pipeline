@@ -3,7 +3,7 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven'
+        maven 'maven-3.9'
     }
     environment {
         DOCKER_REPO_SERVER = '730007904766.dkr.ecr.ca-central-1.amazonaws.com'
@@ -61,7 +61,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'gitlab-repo-token', passwordVariable: 'PASS', usernameVariable: 'USER')]){
-                        sh "git remote set-url origin https://${USER}:${PASS}@gitlab.com:ummahimi-group/java-maven-app-eks.git"
+                        sh "git remote set-url origin https://${USER}:${PASS}@gitlab.com/ummahimi-group/java-maven-app-eks.git"
                         sh 'git add .'
                         sh 'git commit -m "ci: version bump"'
                         sh 'git push origin HEAD:jenkins-ecr'
