@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     echo "building the docker image..."
-                    withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]){
+                    withCredentials([usernamePassword(credentialsId: 'ecr-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]){
                         sh "docker build -t ${DOCKER_REPO}:${IMAGE_NAME} ."
                         sh 'echo $PASS | docker login -u $USER --password-stdin ${DOCKER_REPO_SERVER}'
                         sh "docker push ${DOCKER_REPO}:${IMAGE_NAME}"
@@ -64,7 +64,7 @@ pipeline {
                         sh "git remote set-url origin https://${USER}:${PASS}@gitlab.com:ummahimi-group/java-maven-app-eks.git"
                         sh 'git add .'
                         sh 'git commit -m "ci: version bump"'
-                        sh 'git push origin HEAD:jenkins-jobs'
+                        sh 'git push origin HEAD:jenkins-ecr'
                     }
                 }
             }
