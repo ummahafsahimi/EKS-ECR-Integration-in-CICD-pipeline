@@ -1,7 +1,6 @@
 
-Solution branch is **jenkins-ecr**
+## Kubernetes CI/CD Capstone Project: AWS EKS and ECR integrated, version controlled.
 
-## capstone1-AWS-EKS-ECR-Demo
  I have created a complete CI/CD pipeline with Jenkins that increment version, build atrifact for java maven application, build docker 
  image for that application and push it to the AWS ECR repository, then deploy the latest applcation to the EKS cluster, and finally 
  commit the version update to the Git.
